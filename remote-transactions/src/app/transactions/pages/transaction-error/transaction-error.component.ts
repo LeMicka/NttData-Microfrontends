@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./transaction-error.component.css']
 })
 export class TransactionErrorComponent {
-
+  
 }
