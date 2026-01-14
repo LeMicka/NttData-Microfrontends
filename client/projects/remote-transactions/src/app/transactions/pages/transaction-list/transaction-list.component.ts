@@ -6,6 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { getListService } from 'src/app/shared/services/get-list/get-list.service';
 import { IOperationType } from 'src/app/shared/models/operation-type';
 import { Router } from '@angular/router';
+import { MyLibService } from 'my-lib';
 
 @Component({
   selector: 'app-transaction-list',
@@ -20,7 +21,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./transaction-list.component.css'],
 })
 export class TransactionListComponent {
-  displayedColumns: string[] = [
+  public displayedColumns: string[] = [
     'id',
     'title',
     'date',
@@ -32,7 +33,7 @@ export class TransactionListComponent {
   public hasError: boolean = false;
   public data: IOperationType[] = [];
 
-  constructor(private _listData: getListService, private router: Router) {}
+  constructor(private _listData: getListService, private router: Router, private _MyLibService: MyLibService) {}
 
   ngOnInit(): void {
     this._listData.getListData('load').subscribe({
@@ -49,16 +50,17 @@ export class TransactionListComponent {
   public loadList(mode: string): void {
     this.isLoading = true;
     setTimeout(() => {
-      try {
-        this._listData.getListData(mode).subscribe((data) => {
-          this.data = data;
-        });
+      this._listData.getListData(mode).subscribe({
+        next: (data) => {
+        this.data = data;
         this.hasError = false;
         this.isLoading = false;
-      } catch (error) {
-        this.isLoading = false;
-        this.hasError = true;
-      }
+        },
+        error: (err) => {
+          this.isLoading = false;
+          this.hasError = true;
+        },
+      })
     }, 1000);
   }
 

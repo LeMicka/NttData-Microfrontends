@@ -14,8 +14,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./transaction-detail.component.css']
 })
 export class TransactionDetailComponent {
-  @Input() id!: string;
   public data!: IOperationType;
+
 
   constructor(
     private getElementService: getElementService,
