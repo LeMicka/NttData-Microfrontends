@@ -1,15 +1,25 @@
-const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+const {
+  shareAll,
+  withModuleFederationPlugin,
+} = require("@angular-architects/module-federation/webpack");
 
 module.exports = withModuleFederationPlugin({
-
-  name: 'remote-transactions',
+  name: "remote-transactions",
 
   exposes: {
-    './TransactionsRoutes': './src/app/transactions/transactions.routes.ts',
+    "./TransactionsRoutes": "./src/app/app.routes.ts",
   },
 
   shared: {
-    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+    ...shareAll({
+      singleton: true,
+      strictVersion: true,
+      requiredVersion: "auto",
+    }),
+    "my-lib":  {
+      singleton: true,
+      strictVersion: true,
+      requiredVersion: "0.0.1",
+    }
   },
-
 });

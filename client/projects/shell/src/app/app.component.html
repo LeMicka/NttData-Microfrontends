@@ -1,5 +1,6 @@
 <mat-toolbar color="primary" class="flex justify-between">
   <span>Online Banking</span>
+  <span>Balance: {{balance$ | async}}</span>
   <nav>
     <a
       routerLink="transactions/list"

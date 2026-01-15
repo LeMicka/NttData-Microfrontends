@@ -1,4 +1,4 @@
-import { IOperationType } from "../operation-type";
+import { IOperationType } from "../operation-type.interface";
 
 export const mockOperations : IOperationType[] = [
     {

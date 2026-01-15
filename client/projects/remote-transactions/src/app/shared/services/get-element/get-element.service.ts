@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { IOperationType } from '../../models/operation-type';
+import { IOperationType } from '../../models/operation-type.interface';
 import { mockOperations } from '../../models/mocks/data-mock';
 
 @Injectable({

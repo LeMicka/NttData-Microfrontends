@@ -1,12 +1,15 @@
+import { MyLibService } from 'my-lib';
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { getListService } from 'src/app/shared/services/get-list/get-list.service';
-import { IOperationType } from 'src/app/shared/models/operation-type';
+
 import { Router } from '@angular/router';
-import { MyLibService } from 'my-lib';
+
+import { IOperationType } from 'src/app/shared/models/operation-type.interface';
 
 @Component({
   selector: 'app-transaction-list',
@@ -37,10 +40,10 @@ export class TransactionListComponent {
 
   ngOnInit(): void {
     this._listData.getListData('load').subscribe({
-      next: (response) => {
+      next: (response: IOperationType[]) => {
         this.data = response;
       },
-      error: (err) => {
+      error: (err: string) => {
         this.hasError = true;
       },
     });
@@ -51,12 +54,12 @@ export class TransactionListComponent {
     this.isLoading = true;
     setTimeout(() => {
       this._listData.getListData(mode).subscribe({
-        next: (data) => {
+        next: (data: IOperationType[]) => {
         this.data = data;
         this.hasError = false;
         this.isLoading = false;
         },
-        error: (err) => {
+        error: (err: string) => {
           this.isLoading = false;
           this.hasError = true;
         },

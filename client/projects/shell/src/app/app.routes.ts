@@ -13,7 +13,7 @@ export const routes: Routes = [
             type: 'module',
             remoteEntry: 'http://localhost:4201/remoteEntry.js',
             exposedModule: './TransactionsRoutes'
-        }).then(m => m.TRANSACTIONS_ROUTES)
+        }).then(m => m.routes)
     },
 
     { path: '**', component: GlobalErrorComponent }
